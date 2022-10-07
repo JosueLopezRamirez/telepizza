@@ -83,7 +83,6 @@ Order.findByDeliveryAndStatus = (id_delivery, status, result) => {
       console.log("Error:", err);
       result(err, null);
     } else {
-      console.log("Ordenes: ", data);
       result(null, data);
     }
   });
@@ -168,7 +167,6 @@ Order.findByStatus = (status, result) => {
       console.log("Error:", err);
       result(err, null);
     } else {
-      console.log("Ordenes: ", data);
       result(null, data);
     }
   });
@@ -195,7 +193,7 @@ Order.create = (order, result) => {
       "PAGADO", // 1- PAGADO 2- DESPACHADO 3- EN CAMINO 4- ENTREGADO
       Date.now(),
       new Date(),
-      new Date()
+      new Date(),
     ],
     (err, res) => {
       if (err) {
@@ -226,7 +224,7 @@ Order.updateToDispached = (id_order, id_delivery, result) => {
       id_delivery,
       "DESPACHADO", // 1- PAGADO 2- DESPACHADO 3- EN CAMINO 4- ENTREGADO
       new Date(),
-      id_order
+      id_order,
     ],
     (err, res) => {
       if (err) {
@@ -254,7 +252,7 @@ Order.updateToOnTheWay = (id_order, result) => {
     [
       "EN CAMINO", // 1- PAGADO 2- DESPACHADO 3- EN CAMINO 4- ENTREGADO
       new Date(),
-      id_order
+      id_order,
     ],
     (err, res) => {
       if (err) {

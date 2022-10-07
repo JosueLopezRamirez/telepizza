@@ -12,17 +12,19 @@ module.exports = {
         return res.status(501).json({
           success: false,
           message: "Hubo un error al momento de listar las ordenes",
-          error: err
+          error: err,
         });
       }
 
-      for (const d of data) {
-        d.address = JSON.parse(d.address);
-        d.client = JSON.parse(d.client);
-        d.products = JSON.parse(d.products);
-      }
+      const result = data.map((item) => {
+        return {
+          address: JSON.parse(JSON.stringify(item.address)),
+          client: JSON.parse(JSON.stringify(item.client)),
+          products: JSON.parse(JSON.stringify(item.products)),
+        };
+      });
 
-      res.status(201).json(data);
+      res.status(201).json(result);
     });
   },
   findByDeliveryAndStatus(req, res) {
@@ -34,18 +36,18 @@ module.exports = {
         return res.status(501).json({
           success: false,
           message: "Hubo un error al momento de listar las ordenes",
-          error: err
+          error: err,
         });
       }
 
-      for (const d of data) {
-        d.address = JSON.parse(d.address);
-        d.client = JSON.parse(d.client);
-        d.products = JSON.parse(d.products);
-        d.delivery = JSON.parse(d.delivery);
-      }
+      const result = data.map((item) => ({
+        address: JSON.parse(JSON.stringify(item.address)),
+        client: JSON.parse(JSON.stringify(item.client)),
+        products: JSON.parse(JSON.stringify(item.products)),
+        delivery: JSON.parse(JSON.stringify(item.delivery)),
+      }));
 
-      res.status(201).json(data);
+      res.status(201).json(result);
     });
   },
   async create(req, res) {
@@ -56,7 +58,7 @@ module.exports = {
         return res.status(501).json({
           success: false,
           message: "Hubo un error con el registro de la orden",
-          error: err
+          error: err,
         });
       }
 
@@ -71,7 +73,7 @@ module.exports = {
                 success: false,
                 message:
                   "Hubo un error con la creacion de los productos en la orden",
-                error: err
+                error: err,
               });
             }
           }
@@ -81,7 +83,7 @@ module.exports = {
       res.status(201).json({
         success: true,
         message: "La orden se creo correctamente",
-        data: `${id}` // EL ID DE LA NUEVA CATEGORIA QUE SE REGISTRO
+        data: `${id}`, // EL ID DE LA NUEVA CATEGORIA QUE SE REGISTRO
       });
     });
   },
@@ -93,14 +95,14 @@ module.exports = {
         return res.status(501).json({
           success: false,
           message: "Hubo un error al momento de actualizar la orden",
-          error: err
+          error: err,
         });
       }
 
       res.status(201).json({
         success: true,
         message: "La orden se ha actualizado correctamente",
-        data: `${id_order}` // EL ID DE LA NUEVA CATEGORIA QUE SE REGISTRO
+        data: `${id_order}`, // EL ID DE LA NUEVA CATEGORIA QUE SE REGISTRO
       });
     });
   },
@@ -112,15 +114,15 @@ module.exports = {
         return res.status(501).json({
           success: false,
           message: "Hubo un error al momento de actualizar la orden",
-          error: err
+          error: err,
         });
       }
 
       res.status(201).json({
         success: true,
         message: "La orden se ha actualizado correctamente",
-        data: `${id_order}` // EL ID DE LA NUEVA CATEGORIA QUE SE REGISTRO
+        data: `${id_order}`, // EL ID DE LA NUEVA CATEGORIA QUE SE REGISTRO
       });
     });
-  }
+  },
 };

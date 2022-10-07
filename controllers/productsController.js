@@ -13,7 +13,7 @@ module.exports = {
         return res.status(501).json({
           success: false,
           message: "Hubo un error al obtener las categorias",
-          error: err
+          error: err,
         });
       }
 
@@ -26,13 +26,11 @@ module.exports = {
     const files = req.files;
     let inserts = 0;
 
-    console.log("Product: ", product), console.log("Files: ", files);
-
     if (files.length === 0) {
       return res.status(501).json({
         success: false,
         message: "Hubo un error no ha seleccionado imagenes",
-        error: err
+        error: err,
       });
     } else {
       Product.create(product, (err, data) => {
@@ -40,7 +38,7 @@ module.exports = {
           return res.status(501).json({
             success: false,
             message: "Hubo un error con el registro del producto",
-            error: err
+            error: err,
           });
         }
 
@@ -68,7 +66,7 @@ module.exports = {
                 return res.status(501).json({
                   success: false,
                   message: "Hubo un error con el registro del producto",
-                  error: err
+                  error: err,
                 });
               }
               inserts = inserts + 1;
@@ -77,7 +75,7 @@ module.exports = {
                 return res.status(201).json({
                   success: true,
                   message: "El producto se creo correctamente",
-                  data: data
+                  data: data,
                 });
               }
             });
@@ -87,5 +85,5 @@ module.exports = {
         start();
       });
     }
-  }
+  },
 };

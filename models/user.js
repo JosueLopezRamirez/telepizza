@@ -33,7 +33,6 @@ User.findDeliveryMen = (result) => {
       console.log("Error:", err);
       result(err, null);
     } else {
-      console.log("Usuario obtenido: ", user);
       result(null, user);
     }
   });
@@ -78,7 +77,6 @@ User.findById = (id, result) => {
       console.log("Error:", err);
       result(err, null);
     } else {
-      console.log("Usuario obtenido:", user[0]);
       result(null, user[0]);
     }
   });
@@ -123,7 +121,6 @@ User.findByEmail = (email, result) => {
       console.log("Error:", err);
       result(err, null);
     } else {
-      console.log("Usuario obtenido:", user[0]);
       result(null, user[0]);
     }
   });
@@ -157,7 +154,7 @@ User.create = async (user, result) => {
       user.image,
       hash,
       new Date(),
-      new Date()
+      new Date(),
     ],
     (err, res) => {
       if (err) {
