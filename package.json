@@ -4,6 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "build": "node build.js",
     "start": "node server.js"
   },
   "author": "JOnathan\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[\u001b[o\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C Goyes",
