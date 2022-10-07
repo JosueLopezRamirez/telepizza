@@ -5,9 +5,8 @@
   "main": "server.js",
   "scripts": {
     "build": "node build.js",
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
-  "author": "JOnathan\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[\u001b[o\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C Goyes",
   "license": "MIT",
   "dependencies": {
     "@google-cloud/storage": "^5.18.2",
@@ -20,5 +19,8 @@
     "mysql2": "^2.3.3",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }
