@@ -18,6 +18,7 @@ module.exports = {
 
       const result = data.map((item) => {
         return {
+          ...item,
           address: JSON.parse(JSON.stringify(item.address)),
           client: JSON.parse(JSON.stringify(item.client)),
           products: JSON.parse(JSON.stringify(item.products)),
@@ -41,11 +42,14 @@ module.exports = {
       }
 
       const result = data.map((item) => ({
+        ...item,
         address: JSON.parse(JSON.stringify(item.address)),
         client: JSON.parse(JSON.stringify(item.client)),
         products: JSON.parse(JSON.stringify(item.products)),
         delivery: JSON.parse(JSON.stringify(item.delivery)),
       }));
+
+      console.log("result", result);
 
       res.status(201).json(result);
     });
