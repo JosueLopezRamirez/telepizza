@@ -4,6 +4,89 @@ const db = require("../config/config");
 
 const Order = {};
 
+Order.findByClientAndStatus = (id_client, status, result) => {
+  const sql = `
+      select
+      CONVERT(O.id,char) as id,
+      CONVERT(O.id_client,char) as id_client,
+      CONVERT(O.id_address,char) as id_address,
+      CONVERT(O.id_delivery,char) as id_delivery,
+      O.status,
+      O.timestamp,
+      O.lat,
+      O.lng,
+        json_object(
+            "id",CONVERT(A.id,char),
+            "address",A.address,
+            "neighborhood",A.neighborhood,
+            "lat",A.lat,
+            "lng",A.lng
+        ) as address,
+        json_object(
+        "id",CONVERT(U.id,char),  
+            "name",U.name,
+            "lastname",U.lastname,
+            "image",U.image,
+            "phone",U.phone
+        ) as client,
+        json_object(
+        "id",CONVERT(U2.id,char),  
+            "name",U2.name,
+            "lastname",U2.lastname,
+            "image",U2.image,
+            "phone",U2.phone
+        ) as delivery,
+        json_arrayagg(
+        json_object(
+            "id",CONVERT(P.id,char),
+            "name",P.name,
+            "description",P.description,
+            "price", P.price,
+            "image1",P.image1,
+            "image2", P.image2,
+            "image3", P.image3,
+            "quantity", OHP.quantity
+        )
+      ) as products
+    from 
+      orders as O
+    inner join 
+      users as U
+    on
+      U.id = O.id_client
+    left join
+      users as U2
+    on
+    U2.id = O.id_delivery
+    inner join
+      address as A
+    on 
+      A.id = O.id_address
+    inner join 
+      order_has_produccts as OHP
+    on
+      OHP.id_order = O.id
+    inner join 
+      products as P
+    on 
+      P.id = OHP.id_product
+    where
+    O.id_client = ? and O.status = ?
+    group by 
+      O.id
+    order by 
+      O.timestamp;  
+  `;
+
+  db.query(sql, [id_client, status], (err, data) => {
+    if (err) {
+      console.log("Error:", err);
+      result(err, null);
+    } else {
+      result(null, data);
+    }
+  });
+};
 Order.findByDeliveryAndStatus = (id_delivery, status, result) => {
   const sql = `
       select

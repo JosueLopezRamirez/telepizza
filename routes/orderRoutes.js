@@ -22,6 +22,11 @@ module.exports = (app) => {
     passport.authenticate("jwt", { session: false }),
     ordersController.findByDeliveryAndStatus
   );
+  app.get(
+    "/api/orders/findByClientAndStatus/:id_client/:status",
+    passport.authenticate("jwt", { session: false }),
+    ordersController.findByClientAndStatus
+  );
   app.post(
     "/api/orders/updateToDispached",
     passport.authenticate("jwt", { session: false }),

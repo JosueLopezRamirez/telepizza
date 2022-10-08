@@ -54,6 +54,33 @@ module.exports = {
       res.status(201).json(result);
     });
   },
+
+  findByClientAndStatus(req, res) {
+    const status = req.params.status;
+    const id_client = req.params.id_client;
+
+    Order.findByClientAndStatus(id_client, status, (err, data) => {
+      if (err) {
+        return res.status(501).json({
+          success: false,
+          message: "Hubo un error al momento de listar las ordenes",
+          error: err
+        });
+      }
+
+      const result = data.map((item) => ({
+        ...item,
+        address: JSON.parse(JSON.stringify(item.address)),
+        client: JSON.parse(JSON.stringify(item.client)),
+        products: JSON.parse(JSON.stringify(item.products)),
+        delivery: JSON.parse(JSON.stringify(item.delivery))
+      }));
+
+      console.log("result", result);
+
+      res.status(201).json(result);
+    });
+  },
   async create(req, res) {
     const order = req.body;
 
