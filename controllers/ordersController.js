@@ -12,7 +12,7 @@ module.exports = {
         return res.status(501).json({
           success: false,
           message: "Hubo un error al momento de listar las ordenes",
-          error: err,
+          error: err
         });
       }
 
@@ -21,7 +21,7 @@ module.exports = {
           ...item,
           address: JSON.parse(JSON.stringify(item.address)),
           client: JSON.parse(JSON.stringify(item.client)),
-          products: JSON.parse(JSON.stringify(item.products)),
+          products: JSON.parse(JSON.stringify(item.products))
         };
       });
 
@@ -37,7 +37,7 @@ module.exports = {
         return res.status(501).json({
           success: false,
           message: "Hubo un error al momento de listar las ordenes",
-          error: err,
+          error: err
         });
       }
 
@@ -46,7 +46,7 @@ module.exports = {
         address: JSON.parse(JSON.stringify(item.address)),
         client: JSON.parse(JSON.stringify(item.client)),
         products: JSON.parse(JSON.stringify(item.products)),
-        delivery: JSON.parse(JSON.stringify(item.delivery)),
+        delivery: JSON.parse(JSON.stringify(item.delivery))
       }));
 
       console.log("result", result);
@@ -62,7 +62,7 @@ module.exports = {
         return res.status(501).json({
           success: false,
           message: "Hubo un error con el registro de la orden",
-          error: err,
+          error: err
         });
       }
 
@@ -77,7 +77,7 @@ module.exports = {
                 success: false,
                 message:
                   "Hubo un error con la creacion de los productos en la orden",
-                error: err,
+                error: err
               });
             }
           }
@@ -87,7 +87,7 @@ module.exports = {
       res.status(201).json({
         success: true,
         message: "La orden se creo correctamente",
-        data: `${id}`, // EL ID DE LA NUEVA CATEGORIA QUE SE REGISTRO
+        data: `${id}` // EL ID DE LA NUEVA CATEGORIA QUE SE REGISTRO
       });
     });
   },
@@ -99,14 +99,14 @@ module.exports = {
         return res.status(501).json({
           success: false,
           message: "Hubo un error al momento de actualizar la orden",
-          error: err,
+          error: err
         });
       }
 
       res.status(201).json({
         success: true,
         message: "La orden se ha actualizado correctamente",
-        data: `${id_order}`, // EL ID DE LA NUEVA CATEGORIA QUE SE REGISTRO
+        data: `${id_order}` // EL ID DE LA NUEVA CATEGORIA QUE SE REGISTRO
       });
     });
   },
@@ -118,15 +118,34 @@ module.exports = {
         return res.status(501).json({
           success: false,
           message: "Hubo un error al momento de actualizar la orden",
-          error: err,
+          error: err
         });
       }
 
       res.status(201).json({
         success: true,
         message: "La orden se ha actualizado correctamente",
-        data: `${id_order}`, // EL ID DE LA NUEVA CATEGORIA QUE SE REGISTRO
+        data: `${id_order}` // EL ID DE LA NUEVA CATEGORIA QUE SE REGISTRO
       });
     });
   },
+  updateLatLng(req, res) {
+    const order = req.body;
+
+    Order.updateToOnTheWay(order, (err, id_order) => {
+      if (err) {
+        return res.status(501).json({
+          success: false,
+          message: "Hubo un error al momento de actualizar la orden",
+          error: err
+        });
+      }
+
+      res.status(201).json({
+        success: true,
+        message: "La orden se ha actualizado correctamente",
+        data: `${id_order}` // EL ID DE LA NUEVA CATEGORIA QUE SE REGISTRO
+      });
+    });
+  }
 };

@@ -193,7 +193,7 @@ Order.create = (order, result) => {
       "PAGADO", // 1- PAGADO 2- DESPACHADO 3- EN CAMINO 4- ENTREGADO
       Date.now(),
       new Date(),
-      new Date(),
+      new Date()
     ],
     (err, res) => {
       if (err) {
@@ -224,7 +224,7 @@ Order.updateToDispached = (id_order, id_delivery, result) => {
       id_delivery,
       "DESPACHADO", // 1- PAGADO 2- DESPACHADO 3- EN CAMINO 4- ENTREGADO
       new Date(),
-      id_order,
+      id_order
     ],
     (err, res) => {
       if (err) {
@@ -252,7 +252,7 @@ Order.updateToOnTheWay = (id_order, result) => {
     [
       "EN CAMINO", // 1- PAGADO 2- DESPACHADO 3- EN CAMINO 4- ENTREGADO
       new Date(),
-      id_order,
+      id_order
     ],
     (err, res) => {
       if (err) {
@@ -260,6 +260,36 @@ Order.updateToOnTheWay = (id_order, result) => {
         result(err, null);
       } else {
         result(null, id_order);
+      }
+    }
+  );
+};
+
+Order.updateLatLng = (order, result) => {
+  const sql = `
+  UPDATE
+      orders
+  SET
+      lat = ?,
+      lng = ?,
+      updated_at = ?
+  WHERE
+      id = ?`;
+
+  db.query(
+    sql,
+    [
+      order.lat,
+      order.lng, // 1- PAGADO 2- DESPACHADO 3- EN CAMINO 4- ENTREGADO
+      new Date(),
+      order.id
+    ],
+    (err, res) => {
+      if (err) {
+        console.log("Error:", err);
+        result(err, null);
+      } else {
+        result(null, order.id);
       }
     }
   );
