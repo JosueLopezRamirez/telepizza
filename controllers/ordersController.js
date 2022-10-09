@@ -1,6 +1,4 @@
 /** @format */
-
-const { updateToDelivered } = require("../models/order");
 const Order = require("../models/order");
 const OrdersHasProduct = require("../models/order_has_products");
 
