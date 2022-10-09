@@ -1,5 +1,6 @@
 /** @format */
 
+const { updateToDelivered } = require("../models/order");
 const Order = require("../models/order");
 const OrdersHasProduct = require("../models/order_has_products");
 
@@ -156,6 +157,26 @@ module.exports = {
       });
     });
   },
+  updateToDelivered(req, res) {
+    const order = req.body;
+
+    Order.updateToDelivered(order.id, (err, id_order) => {
+      if (err) {
+        return res.status(501).json({
+          success: false,
+          message: "Hubo un error al momento de actualizar la orden",
+          error: err
+        });
+      }
+
+      res.status(201).json({
+        success: true,
+        message: "La orden se ha actualizado correctamente",
+        data: `${id_order}` // EL ID DE LA NUEVA CATEGORIA QUE SE REGISTRO
+      });
+    });
+  },
+
   updateLatLng(req, res) {
     const order = req.body;
 

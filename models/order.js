@@ -379,4 +379,32 @@ Order.updateLatLng = (order, result) => {
   );
 };
 
+Order.updateToDelivered = (id_order, result) => {
+  const sql = `
+  UPDATE
+      orders
+  SET
+      status = ?,
+      updated_at = ?
+  WHERE
+      id = ?`;
+
+  db.query(
+    sql,
+    [
+      "ENTREGADO", // 1- PAGADO 2- DESPACHADO 3- EN CAMINO 4- ENTREGADO
+      new Date(),
+      id_order
+    ],
+    (err, res) => {
+      if (err) {
+        console.log("Error:", err);
+        result(err, null);
+      } else {
+        result(null, id_order);
+      }
+    }
+  );
+};
+
 module.exports = Order;
