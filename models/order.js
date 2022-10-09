@@ -372,6 +372,7 @@ Order.updateLatLng = (order, result) => {
         console.log("Error:", err);
         result(err, null);
       } else {
+        console.log("Order: ", res);
         result(null, order.id);
       }
     }

@@ -159,7 +159,7 @@ module.exports = {
   updateLatLng(req, res) {
     const order = req.body;
 
-    Order.updateToOnTheWay(order, (err, id_order) => {
+    Order.updateLatLng(order, (err, id_order) => {
       if (err) {
         return res.status(501).json({
           success: false,
