@@ -5,6 +5,22 @@ const storage = require("../utils/cloud_storage");
 const asyncForEach = require("../utils/async_foreach");
 
 module.exports = {
+  findProducts(req, res) {
+    const id_category = req.params.id_category;
+    const name = req.params.name;
+
+    Product.findByCategoryAndName(name, id_category, (err, resdata) => {
+      if (err) {
+        return res.status(501).json({
+          success: false,
+          message: "Hubo un error al obtener las categorias",
+          error: err
+        });
+      }
+
+      res.status(201).json(resdata);
+    });
+  },
   findByCategories(req, res) {
     const id_category = req.params.id_category;
 
@@ -13,7 +29,7 @@ module.exports = {
         return res.status(501).json({
           success: false,
           message: "Hubo un error al obtener las categorias",
-          error: err,
+          error: err
         });
       }
 
@@ -30,7 +46,7 @@ module.exports = {
       return res.status(501).json({
         success: false,
         message: "Hubo un error no ha seleccionado imagenes",
-        error: err,
+        error: err
       });
     } else {
       Product.create(product, (err, data) => {
@@ -38,7 +54,7 @@ module.exports = {
           return res.status(501).json({
             success: false,
             message: "Hubo un error con el registro del producto",
-            error: err,
+            error: err
           });
         }
 
@@ -66,7 +82,7 @@ module.exports = {
                 return res.status(501).json({
                   success: false,
                   message: "Hubo un error con el registro del producto",
-                  error: err,
+                  error: err
                 });
               }
               inserts = inserts + 1;
@@ -75,7 +91,7 @@ module.exports = {
                 return res.status(201).json({
                   success: true,
                   message: "El producto se creo correctamente",
-                  data: data,
+                  data: data
                 });
               }
             });
@@ -85,5 +101,5 @@ module.exports = {
         start();
       });
     }
-  },
+  }
 };

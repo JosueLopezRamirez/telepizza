@@ -18,4 +18,9 @@ module.exports = (app, upload) => {
     passport.authenticate("jwt", { session: false }),
     productsController.findByCategories
   );
+  app.get(
+    "/api/products/findByProducts/:id_category/:name",
+    passport.authenticate("jwt", { session: false }),
+    productsController.findProducts
+  );
 };

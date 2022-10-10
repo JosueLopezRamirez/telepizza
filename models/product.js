@@ -4,6 +4,32 @@ const db = require("../config/config");
 
 const Product = {};
 
+Product.findByCategoryAndName = (name, id_category, result) => {
+  const sql = `
+    SELECT
+        CONVERT(P.id,char) as id,
+        P.name,
+        P.description,
+        P.price,
+        P.image1,
+        P.image2,
+        P.image3,
+        CONVERT(P.id_category,char) AS id_category
+    FROM
+        products as P
+    WHERE
+        P.id_category = ? and LOWER(P.name) like ?`;
+  db.query(sql, [id_category, name.toLowerCase()], (err, res) => {
+    if (err) {
+      console.log("Error:", err);
+      result(err, null);
+    } else {
+      console.log("Informacion de prorductos:", res);
+      result(null, res);
+    }
+  });
+};
+
 Product.findByCategory = (id_category, result) => {
   const sql = `
     SELECT
