@@ -15,7 +15,7 @@ module.exports = {
         return res.status(501).json({
           success: false,
           message: "Hubo un error al obtener la informacion",
-          error: err,
+          error: err
         });
       }
       return res.status(201).json(data);
@@ -33,7 +33,7 @@ module.exports = {
         return res.status(501).json({
           success: false,
           message: "Hubo un error con el registro del usuario",
-          error: err,
+          error: err
         });
       }
 
@@ -41,7 +41,7 @@ module.exports = {
         return res.status(401).json({
           // EL CLIENTE NO TIENE AUTORIZACION PARTA REALIZAR ESTA PETICION (401)
           success: false,
-          message: "El email no fue encontrado",
+          message: "El email no fue encontrado"
         });
       }
 
@@ -56,19 +56,19 @@ module.exports = {
 
         const data = {
           ...myUser,
-          session_token: `JWT ${token}`,
+          session_token: `JWT ${token}`
         };
 
         return res.status(201).json({
           success: true,
           message: "El usuario fue autenticado",
-          data: data, // EL ID DEL NUEVO USUARIO QUE SE REGISTRO
+          data: data // EL ID DEL NUEVO USUARIO QUE SE REGISTRO
         });
       } else {
         return res.status(401).json({
           // EL CLIENTE NO TIENE AUTORIZACION PARTA REALIZAR ESTA PETICION (401)
           success: false,
-          message: "El password es incorrecto",
+          message: "El password es incorrecto"
         });
       }
     });
@@ -81,19 +81,19 @@ module.exports = {
         return res.status(501).json({
           success: false,
           message: "Hubo un error con el registro del usuario",
-          error: err,
+          error: err
         });
       }
 
       return res.status(201).json({
         success: true,
         message: "El registro se realizo correctamente",
-        data: `${data}`, // EL ID DEL NUEVO USUARIO QUE SE REGISTRO
+        data: `${data}` // EL ID DEL NUEVO USUARIO QUE SE REGISTRO
       });
     });
   },
   async registerWithImage(req, res) {
-    const user = JSON.parse(req.body.user); // CAPTURO LOS DATOS QUE ME ENVIE EL CLIENTE
+    const user = req.body.user; // CAPTURO LOS DATOS QUE ME ENVIE EL CLIENTE
 
     const files = req.files;
 
@@ -111,7 +111,7 @@ module.exports = {
         return res.status(501).json({
           success: false,
           message: "Hubo un error con el registro del usuario",
-          error: err,
+          error: err
         });
       }
 
@@ -128,13 +128,13 @@ module.exports = {
           return res.status(501).json({
             success: false,
             message: "Hubo un error con la asignacion del rol del usuario",
-            error: err,
+            error: err
           });
         }
         return res.status(201).json({
           success: true,
           message: "El registro se realizo correctamente",
-          data: user,
+          data: user
         });
       });
     });
@@ -159,7 +159,7 @@ module.exports = {
         return res.status(501).json({
           success: false,
           message: "Hubo un error con el registro del usuario",
-          error: err,
+          error: err
         });
       }
 
@@ -168,7 +168,7 @@ module.exports = {
           return res.status(501).json({
             success: false,
             message: "Hubo un error con el registro del usuario",
-            error: err,
+            error: err
           });
         }
         console.log("MyData:  ", myDataSpace);
@@ -179,7 +179,7 @@ module.exports = {
         return res.status(201).json({
           success: true,
           message: "El usuario se actualizo correctamente",
-          data: myDataSpace,
+          data: myDataSpace
         });
       });
     });
@@ -193,7 +193,7 @@ module.exports = {
         return res.status(501).json({
           success: false,
           message: "Hubo un error con el registro del usuario",
-          error: err,
+          error: err
         });
       }
 
@@ -202,7 +202,7 @@ module.exports = {
           return res.status(501).json({
             success: false,
             message: "Hubo un error con el registro del usuario",
-            error: err,
+            error: err
           });
         }
         console.log("MyData:  ", myDataSpace);
@@ -212,9 +212,9 @@ module.exports = {
         return res.status(201).json({
           success: true,
           message: "El usuario se actualizo correctamente",
-          data: myDataSpace,
+          data: myDataSpace
         });
       });
     });
-  },
+  }
 };
