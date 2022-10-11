@@ -98,6 +98,8 @@ module.exports = {
 
     const files = req.files;
 
+    console.log("USER: ", user);
+    console.log("Files: ", files);
     if (files.length > 0) {
       const path = `image_${Date.now()}`;
       const url = await storage(files[0], path);
