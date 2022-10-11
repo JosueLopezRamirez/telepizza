@@ -154,7 +154,7 @@ User.create = async (user, result) => {
       user.image,
       hash,
       new Date(),
-      new Date(),
+      new Date()
     ],
     (err, res) => {
       if (err) {
@@ -223,6 +223,28 @@ User.updateWithoutImage = (user, result) => {
       }
     }
   );
+};
+
+User.updateNotificationToken = (id, token, result) => {
+  const sql = `
+  UPDATE
+    users
+  SET
+    notification_token= ?,
+    updated_at= ?
+  WHERE
+    id = ?
+  `;
+
+  db.query(sql, [token, new Date(), id], (err, res) => {
+    if (err) {
+      console.log("Error:", err);
+      result(err, null);
+    } else {
+      console.log("Usuario actualizado aqui:", res.insertId);
+      result(null, id);
+    }
+  });
 };
 
 module.exports = User;

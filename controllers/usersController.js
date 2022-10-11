@@ -219,5 +219,24 @@ module.exports = {
         });
       });
     });
+  },
+  async updateNotificationToken(req, res) {
+    const user = req.body.id; // CAPTURO LOS DATOS QUE ME ENVIE EL CLIENTE
+    const token = req.body.token; // CAPTURO LOS DATOS QUE ME ENVIE EL CLIENTE
+
+    User.updateNotificationToken(user, token, (err, data) => {
+      if (err) {
+        return res.status(501).json({
+          success: false,
+          message: "Hubo un error actualizando el token del usuario",
+          error: err
+        });
+      }
+      return res.status(201).json({
+        success: true,
+        message: "El token se actualizo correctamente",
+        data: data
+      });
+    });
   }
 };
