@@ -208,7 +208,7 @@ module.exports = {
             error: err
           });
         }
-        console.log("MyData:  ", myDataSpace);
+        console.log("MyData: ola ", myDataSpace);
         myDataSpace.session_token = user.session_token;
         myDataSpace.roles = JSON.parse(myDataSpace.roles);
 
