@@ -18,7 +18,7 @@ Product.findByCategoryAndName = (name, id_category, result) => {
     FROM
         products as P
     WHERE
-        P.id_category = ? and LOWER(P.name) like '%${name.toLowerCase()}%'`;
+        P.id_category = ? and LOWER(P.name) LIKE '%${name.toLowerCase()}%'`;
   db.query(sql, [id_category], (err, res) => {
     if (err) {
       console.log("Error:", err);
