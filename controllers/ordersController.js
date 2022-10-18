@@ -1,8 +1,6 @@
 /** @format */
 const Order = require("../models/order");
 const OrdersHasProduct = require("../models/order_has_products");
-const User = require("../models/user");
-const NotificationControler = require("../controllers/pushNotificationsController");
 
 module.exports = {
   findByStatus(req, res) {
@@ -130,16 +128,6 @@ module.exports = {
           error: err
         });
       }
-
-      User.findById(order.id_delivery, (err, user) => {
-        if (user !== undefined && user !== null) {
-          NotificationControler.sendNotification(user.notification_token, {
-            title: "Pedido asignado",
-            body: "Te han asignado un pedido nuevo",
-            id_notification: "1"
-          });
-        }
-      });
 
       res.status(201).json({
         success: true,
